@@ -1,13 +1,27 @@
-# Display + graphics
-luma.core>=2.4.0
-luma.lcd>=2.11.0
-Pillow>=9.0.0
-
-# MPD control
-python-mpd2>=3.0.5
-
-# Bluetooth helpers
-pybluez>=0.23
-
-# Utilities
-evdev>=1.6.1
+Adafruit-Blinka==8.69.0
+Adafruit-Blinka-Raspberry-Pi5-Neopixel==1.0.0rc2
+adafruit-circuitpython-busdevice==5.2.15
+adafruit-circuitpython-connectionmanager==3.1.6
+adafruit-circuitpython-neokey==1.1.7
+adafruit-circuitpython-pixelbuf==2.0.10
+adafruit-circuitpython-requests==4.1.15
+adafruit-circuitpython-seesaw==1.18.0
+adafruit-circuitpython-typing==1.12.3
+Adafruit-PlatformDetect==3.86.0
+Adafruit-PureIO==1.1.11
+binho-host-adapter==0.1.6
+cbor2==5.8.0
+evdev==1.9.2
+luma.core==2.5.3
+luma.lcd==2.11.0
+pillow==12.1.0
+pyftdi==0.57.1
+pyserial==3.5
+python-mpd2==3.1.1
+pyusb==1.3.1
+RPi.GPIO==0.7.1
+rpi_ws281x==5.0.0
+smbus2==0.6.0
+spidev==3.8
+sysv_ipc==1.2.0
+typing_extensions==4.15.0
