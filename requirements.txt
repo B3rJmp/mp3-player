@@ -1,0 +1,13 @@
+# Display + graphics
+luma.core>=2.4.0
+luma.lcd>=2.11.0
+Pillow>=9.0.0
+
+# MPD control
+python-mpd2>=3.0.5
+
+# Bluetooth helpers
+pybluez>=0.23
+
+# Utilities
+evdev>=1.6.1
