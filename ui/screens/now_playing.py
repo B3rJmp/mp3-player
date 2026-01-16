@@ -1,29 +1,28 @@
-# ui/screens/now_playing.py
-
-from ui.screens.base import Screen
+from .base import Screen
+from services.mpd import mpd
 from PIL import ImageDraw
 
 class NowPlayingScreen(Screen):
-    def on_enter(self):
-        pass
-
-    def on_exit(self):
-        pass
+    NAME = "Now Playing"
 
     def handle_event(self, event):
-        # Nothing yet
-        pass
+        if event.type == "button" and event.pressed:
+            if event.button == "BTN1":
+                mpd.previous()
+            elif event.button == "BTN2":
+                mpd.play()
+            elif event.button == "BTN3":
+                mpd.stop()
+            elif event.button == "BTN4":
+                mpd.next()
 
     def draw(self, draw: ImageDraw.ImageDraw, region):
         x0, y0, x1, y1 = region
-        draw.rectangle(region, fill=(0,0,0))
-        w = x1 - x0
-        h = y1 - y0
+        draw.rectangle(region, fill="black")
 
-        text = "(No Music)"
-        text_w, text_h = draw.textsize(text)
-        draw.text(
-            (x0 + (w - text_w) // 2, y0 + (h - text_h) // 2),
-            text,
-            fill=(255,255,255)
-        )
+        status = mpd.status()
+        song = status.get("title", "Unknown Track")
+        artist = status.get("artist", "Unknown Artist")
+
+        draw.text((x0+10, y0+10), song, fill="white")
+        draw.text((x0+10, y0+30), artist, fill="white")

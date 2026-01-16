@@ -1,27 +1,20 @@
-# ui/shell.py
+from .layout import ACTION_BAR_REGION, CONTENT_REGION
 
 class UIShell:
-    def __init__(self, action_bar):
+    def __init__(self, display, action_bar, screen):
+        self.display = display
         self.action_bar = action_bar
-        self.screen = None
-
-    def set_screen(self, screen):
-        if self.screen:
-            self.screen.on_exit()
         self.screen = screen
-        self.screen.on_enter()
 
     def handle_event(self, event):
-        if event.get("type") == "button":
-            self.action_bar.handle_button(event["index"])
-            return
-        if self.screen:
-            self.screen.handle_event(event)
+        # Forward button presses to action bar first
+        if hasattr(event, "index") and event.type == "button":
+            self.action_bar.handle_button(event.index)
+        # Forward everything to screen
+        self.screen.handle_event(event)
 
-    def draw(self, draw):
-        self.action_bar.draw(draw)
-
-        if self.screen:
-            w, h = draw.im.size   # get width/height from underlying image
-            region = (0, self.action_bar.height, w, h)
-            self.screen.draw(draw, region)
+    def draw(self):
+        draw = self.display.draw()  # Assume display has a context manager
+        self.action_bar.draw()
+        self.screen.draw(draw, CONTENT_REGION)
+        self.display.show()

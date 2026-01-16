@@ -1,21 +1,18 @@
-# core/app.py
-
-from time import sleep
-from ui.shell import UIShell
-from luma.core.render import canvas
+from core.input import read_event
 
 class App:
-    def __init__(self, action_bar, display):
-        self.shell = UIShell(action_bar)
-        self.display = display
+    """
+    Main app controller.
+    Owns the screen stack / shell.
+    Handles main loop and event dispatch.
+    """
+    def __init__(self, shell):
+        self.shell = shell
+        self.running = True
 
-    def set_screen(self, screen):
-        self.shell.set_screen(screen)
-
-    def handle_event(self, event):
-        self.shell.handle_event(event)
-
-    def draw(self):
-        with canvas(self.display) as draw_ctx:
-            self.shell.draw(draw_ctx)
-        sleep(0.05)
+    def run(self):
+        while self.running:
+            event = read_event()
+            if event:
+                self.shell.handle_event(event)
+            self.shell.draw()
