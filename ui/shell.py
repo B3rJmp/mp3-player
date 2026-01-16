@@ -22,5 +22,6 @@ class UIShell:
         self.action_bar.draw(draw)
 
         if self.screen:
-            region = (0, self.action_bar.height, draw.width, draw.height)
+            w, h = draw.im.size   # get width/height from underlying image
+            region = (0, self.action_bar.height, w, h)
             self.screen.draw(draw, region)
