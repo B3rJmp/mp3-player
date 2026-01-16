@@ -1,3 +1,5 @@
+# ui/screens/now_playing.py
+
 from ui.screens.base import Screen
 from PIL import ImageDraw
 

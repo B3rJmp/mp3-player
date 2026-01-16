@@ -2,20 +2,20 @@
 
 from time import sleep
 from ui.shell import UIShell
+from luma.core.render import canvas
 
 class App:
-    def __init__(self, action_bar):
+    def __init__(self, action_bar, display):
         self.shell = UIShell(action_bar)
-        self.display = None  # assign your luma display instance here
+        self.display = display
 
     def set_screen(self, screen):
         self.shell.set_screen(screen)
 
+    def handle_event(self, event):
+        self.shell.handle_event(event)
+
     def draw(self):
-        if self.display:
-            with self.display as draw:
-                self.shell.draw(draw)
-        else:
-            # For testing without a physical display
-            pass
+        with canvas(self.display) as draw_ctx:
+            self.shell.draw(draw_ctx)
         sleep(0.05)

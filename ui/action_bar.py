@@ -10,13 +10,6 @@ DARK = (30, 30, 30)
 BLINK_DURATION = 0.15  # seconds
 
 class Action:
-    """
-    Represents a single icon-only action in the action bar.
-    icon: callable(draw, cx, cy, fg_color)
-    on_press: callback when button is pressed
-    is_enabled: callable -> bool (optional)
-    get_state: callable -> int (optional, e.g., repeat mode)
-    """
     def __init__(self, icon, on_press, *, is_enabled=None, get_state=None):
         self.icon = icon
         self.on_press = on_press
@@ -41,8 +34,7 @@ class Action:
 
 
 class ActionBar:
-    def __init__(self, display, *, height=32, padding=4, bg=DARK):
-        self.display = display
+    def __init__(self, height=32, padding=4, bg=DARK):
         self.height = height
         self.padding = padding
         self.bg = bg
